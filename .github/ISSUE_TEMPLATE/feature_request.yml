@@ -1,0 +1,54 @@
+name: Feature request
+description: Suggest an idea or improvement for Chronolog.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for suggesting an improvement!
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of the addon?
+      options:
+        - New thing to track
+        - Main window / stats
+        - Current-level widget
+        - Charts / visualization
+        - Slash commands
+        - Other
+    validations:
+      required: false
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: What are you trying to do that's hard or impossible today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe what you'd like Chronolog to do.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any other approaches you thought about, or how you handle this now.
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: Mockups, examples from other addons, or extra context.
+    validations:
+      required: false

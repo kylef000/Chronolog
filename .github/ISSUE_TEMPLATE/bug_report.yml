@@ -1,0 +1,93 @@
+name: Bug report
+description: Report something in Chronolog that isn't working correctly.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. A **Lua error message** and **steps to reproduce**
+        are the most useful things you can include.
+
+  - type: input
+    id: version
+    attributes:
+      label: Chronolog version
+      description: See `## Version` in `Chronolog.toc`, or the in-game AddOns list.
+      placeholder: "1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: realm
+    attributes:
+      label: Server / realm
+      description: Which Ascension realm are you on?
+      placeholder: "Rexxar - Conquest of Azeroth"
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug, and what you expected to happen instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the window with /chrono
+        2. ...
+        3. See the problem
+    validations:
+      required: true
+
+  - type: textarea
+    id: lua-error
+    attributes:
+      label: Lua error (if any)
+      description: >
+        Paste the full error text. Turn Lua errors on with
+        `/console scriptErrors 1`, or use an error addon such as BugSack/!Swatter.
+      render: text
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where does it happen?
+      multiple: true
+      options:
+        - Tracking / recorded numbers look wrong
+        - Main window (/chrono)
+        - Current-level widget (/chrono widget)
+        - Charts / composition bars
+        - Slash commands
+        - Saved data / persistence between sessions
+        - Not sure
+    validations:
+      required: false
+
+  - type: input
+    id: char-level
+    attributes:
+      label: Character level
+      description: Helpful because Chronolog tracks stats per level.
+      placeholder: "42"
+    validations:
+      required: false
+
+  - type: textarea
+    id: other-addons
+    attributes:
+      label: Other addons running
+      description: >
+        List other addons — especially anything that touches the combat log,
+        minimap, or unit frames — so we can rule out conflicts.
+    validations:
+      required: false

@@ -26,6 +26,14 @@ jobs:
           mkdir -p "build/Chronolog"
           cp Core.lua UI.lua Widget.lua Chronolog.toc README.md LICENSE "build/Chronolog/"
 
+          # Stamp the packaged .toc version to match the tag (without the
+          # leading "v"), e.g. tag v1.2.0 -> "## Version: 1.2.0". The repo file
+          # is left untouched; only the zipped copy is changed.
+          VERSION_NUM="${VERSION#v}"
+          sed -i "s/^## Version:.*/## Version: ${VERSION_NUM}/" "build/Chronolog/Chronolog.toc"
+          echo "Packaged .toc version:"
+          grep "^## Version:" "build/Chronolog/Chronolog.toc"
+
           ( cd build && zip -r "../Chronolog-${VERSION}.zip" "Chronolog" )
           echo "Built Chronolog-${VERSION}.zip"
           unzip -l "Chronolog-${VERSION}.zip"

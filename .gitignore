@@ -27,3 +27,6 @@ desktop.ini
 # Packaged builds
 *.zip
 Chronolog-*.zip
+
+# Local deploy script (machine-specific destination path)
+deploy.bat

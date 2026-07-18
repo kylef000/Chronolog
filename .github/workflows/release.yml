@@ -38,12 +38,22 @@ jobs:
           echo "Built Chronolog-${VERSION}.zip"
           unzip -l "Chronolog-${VERSION}.zip"
 
-      - name: Create GitHub Release
+      - name: Create or update GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          gh release create "${GITHUB_REF_NAME}" \
-            "Chronolog-${GITHUB_REF_NAME}.zip" \
-            --title "Chronolog ${GITHUB_REF_NAME}" \
-            --generate-notes
+          TAG="${GITHUB_REF_NAME}"
+          ASSET="Chronolog-${TAG}.zip"
+
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            # Release already exists (e.g. created from the GitHub website).
+            # Attach/replace the zip without erroring.
+            echo "Release ${TAG} exists - uploading asset."
+            gh release upload "${TAG}" "${ASSET}" --clobber
+          else
+            echo "Release ${TAG} does not exist - creating it."
+            gh release create "${TAG}" "${ASSET}" \
+              --title "Chronolog ${TAG}" \
+              --generate-notes
+          fi
